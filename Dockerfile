@@ -23,3 +23,6 @@ EXPOSE 8080
 # Switch to non-root user
 USER appuser
 
+# Start Spring Boot application
+ENTRYPOINT ["java", "-jar", "app.jar"]
+

@@ -1,2 +1,2 @@
 # java-app
-Java for EDOT testing
+Java APP for EDOT testing

@@ -7,10 +7,6 @@ WORKDIR /app
 # Security: create non-root user
 RUN groupadd -r appuser && useradd -r -g appuser appuser
 
-# Download OpenTelemetry Java Agent
-ARG OTEL_AGENT_VERSION=2.12.0
-ADD --chmod=644 https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v${OTEL_AGENT_VERSION}/opentelemetry-javaagent.jar /app/opentelemetry-javaagent.jar
-
 # Copy pre-built JAR from CI build output
 COPY target/*.jar app.jar
 
@@ -27,5 +23,3 @@ EXPOSE 8080
 # Switch to non-root user
 USER appuser
 
-# Run with OTel Java Agent
-ENTRYPOINT ["java", "-javaagent:/app/opentelemetry-javaagent.jar", "-jar", "app.jar"]

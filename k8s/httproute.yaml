@@ -1,0 +1,20 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: java-app-route
+  namespace: java-app
+spec:
+  hostnames:
+    - java.lab
+  parentRefs:
+    - name: lab-gateway
+      namespace: istio-system
+      sectionName: http
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: java-app-service
+          port: 80
